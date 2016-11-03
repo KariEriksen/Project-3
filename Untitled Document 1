@@ -1,0 +1,39 @@
+from scitools.std import *
+
+class graph:
+
+	def __init__(self, filename):
+		self.filename = filename
+		
+		self.extract_data()
+	
+
+	def extract_data(self):
+			 
+		infile = open(self.filename, "r")
+		lines = infile.readlines()
+
+		KineticEnergy = []
+		Time = []
+		
+		for line in lines:
+			values = line.split()
+			KineticEnergy.append(float(values[0]))
+			Time.append(float(values[1]))
+
+		self.KineticEnergy = array(KineticEnergy)
+		self.Time = array(Time)
+		
+		self.plot()
+
+	def plot(self):
+		
+		plot(self.KineticEnergy, self.Time)
+		axis([0, 0.04, 0, 20])
+		title("Stability of Energy")
+		xlabel("Energy fluxtuation")
+		ylabel("Time")
+		raw_input("")
+		
+filename = "energy.xyz"
+h = graph(filename)
